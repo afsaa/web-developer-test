@@ -1,8 +1,11 @@
 const express = require("express");
 const app = express();
-const port = 8080;
 const bodyParser = require("body-parser");
 const monitor = require("pg-monitor");
+const port = process.env.PORT || 8080;
+
+//negotiator = new Negotiator(request);
+//negotiator.mediaTypes();
 
 const dbConfig = {
   "host": "localhost",
@@ -34,7 +37,7 @@ const db = pgp(dbConfig);
 
 // Starting the server
 app.listen(port, () => {
-  console.log("Listening on port 8080...");
+  console.log(`Listening on port ${port}....`);
 });
 
 app.use(bodyParser.json());
@@ -56,16 +59,15 @@ app.get("/", (req, res) => {
 // @access Public
 app.post("/", (req, res) => {
   db.any(
-    `INSERT INTO tarea (nombre, prioridad, fecha_venc) VALUES(${toString(
-      req.body.name
-    )}, ${req.body.priority}, ${toString(req.body.exp_date)})`,
+    `INSERT INTO tarea (nombre, prioridad, fecha_venc) VALUES('${req.body.name}', ${req.body.priority}, '${req.body.exp_date}')`,
     [true]
   )
-    .then(data => {
-      res.json(data);
+    .then(() => {
+      res.json({ success: true });
     })
     .catch(error => {
       console.log("Error: ", error);
+      res.json({ success: false });
     });
 });
 // @route DELETE api/tasks/:id
@@ -73,10 +75,11 @@ app.post("/", (req, res) => {
 // @access Public
 app.delete("/:id", (req, res) => {
   db.any(`DELETE FROM tarea WHERE id=${req.params.id}`, [true])
-    .then(data => {
-      res.json(data);
+    .then(() => {
+      res.json({ success: true });
     })
     .catch(error => {
       console.log("Error: ", error);
+      res.json({ success: false });
     });
 });
