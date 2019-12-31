@@ -45,7 +45,7 @@ app.use(bodyParser.json());
 // @route GET api/tareas
 // @desc Obtener Todas las Tareas
 // @access Public
-app.get("/", (req, res) => {
+app.get("/tareas", (req, res) => {
   db.any("SELECT * FROM tarea", [true])
     .then(data => {
       res.json(data);
@@ -57,9 +57,9 @@ app.get("/", (req, res) => {
 // @route POST api/tareas
 // @desc Crear una tarea
 // @access Public
-app.post("/", (req, res) => {
+app.post("/tareas", (req, res) => {
   db.any(
-    `INSERT INTO tarea (nombre, prioridad, fecha_venc) VALUES('${req.body.name}', ${req.body.priority}, '${req.body.exp_date}')`,
+    `INSERT INTO tarea (nombre, prioridad, fecha_venc) VALUES('${req.body.nombre}', ${req.body.prioridad}, '${req.body.fecha_venc}')`,
     [true]
   )
     .then(() => {
@@ -70,10 +70,10 @@ app.post("/", (req, res) => {
       res.json({ success: false });
     });
 });
-// @route DELETE api/tasks/:id
-// @desc Delete a task
+// @route DELETE api/tareas/:id
+// @desc Eliminar una tarea
 // @access Public
-app.delete("/:id", (req, res) => {
+app.delete("/tareas/:id", (req, res) => {
   db.any(`DELETE FROM tarea WHERE id=${req.params.id}`, [true])
     .then(() => {
       res.json({ success: true });
