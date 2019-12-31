@@ -1,14 +1,21 @@
 import React from "react";
-import TaskAlert from "./components/TaskAlert";
-import AppNavbar from "./components/AppNavbar";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Home from "./components/Pages/Home";
+import Login from "./components/Pages/Login";
 import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <AppNavbar />
-      <TaskAlert nombreTarea="Bañar al perro" expTarea="2019-12-31" />
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/">
+          <Login />
+        </Route>
+        <Route exact path="/home">
+          <Home />
+        </Route>
+      </Switch>
+    </BrowserRouter>
   );
 }
 

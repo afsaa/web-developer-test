@@ -1,12 +1,12 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import {
   Collapse,
   Navbar,
   NavbarToggler,
   NavbarBrand,
   Nav,
-  NavItem,
-  NavLink
+  NavItem
 } from "reactstrap";
 
 const AppNavbar = props => {
@@ -23,8 +23,10 @@ const AppNavbar = props => {
         <NavbarToggler onClick={toggleNavbar} className="mr-2" />
         <Collapse isOpen={!collapsed} navbar>
           <Nav navbar>
-            <NavItem>
-              <NavLink href="https://github.com/afsaa">GitHub</NavLink>
+            <NavItem className="my-2">
+              <Link className="text-light" to="/">
+                LogOut
+              </Link>
             </NavItem>
           </Nav>
         </Collapse>
