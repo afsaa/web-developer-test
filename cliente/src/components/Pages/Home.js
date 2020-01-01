@@ -10,6 +10,7 @@ const Home = () => {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   async function fetchData() {
     setLoading(true);
@@ -19,12 +20,13 @@ const Home = () => {
       setLoading(false);
     } catch (error) {
       setError(error);
+      setLoading(false);
     }
   }
 
   return (
     <div>
-      <AppNavbar />
+      <AppNavbar isLoggedIn={isLoggedIn} />
       <TaskAlert />
       <h2 className="m-3 text-center">Tareas</h2>
       <Container>
