@@ -1,12 +1,13 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
 import {
   Collapse,
   Navbar,
   NavbarToggler,
   NavbarBrand,
   Nav,
-  NavItem
+  NavItem,
+  NavLink
 } from "reactstrap";
 
 const AppNavbar = props => {
@@ -14,33 +15,41 @@ const AppNavbar = props => {
   const isLoggedIn = props.isLoggedIn;
   const toggleNavbar = () => setCollapsed(!collapsed);
 
+  useEffect(() => {
+    let history = useHistory();
+    history.push("/");
+  }, [isLoggedIn]);
+
   return (
     <div>
       <Navbar color="primary" dark>
-        <NavbarBrand href="/" className="mr-auto">
-          Tareas
-        </NavbarBrand>
+        {isLoggedIn ? (
+          <NavbarBrand href="/" className="mr-auto">
+            Tareas
+          </NavbarBrand>
+        ) : (
+          <NavbarBrand href="/" className="mr-auto">
+            Login
+          </NavbarBrand>
+        )}
         <NavbarToggler onClick={toggleNavbar} className="mr-2" />
         <Collapse isOpen={!collapsed} navbar>
           <Nav navbar>
             {isLoggedIn ? (
-              <React.Fragment>
-                <NavItem className="my-2">
-                  <Link className="text-light" to="/home">
-                    Tareas
-                  </Link>
-                </NavItem>
-                <NavItem className="my-2">
-                  <Link className="text-light" to="/">
-                    LogOut
-                  </Link>
-                </NavItem>
-              </React.Fragment>
+              <NavItem className="my-2">
+                <Link
+                  className="text-light"
+                  to="/"
+                  onClick={(isLoggedIn = false)}
+                >
+                  LogOut
+                </Link>
+              </NavItem>
             ) : (
               <NavItem className="my-2">
-                <Link className="text-light" to="/">
-                  Login
-                </Link>
+                <NavLink href="https://github.com/afsaa/web-developer-test">
+                  GitHub
+                </NavLink>
               </NavItem>
             )}
           </Nav>

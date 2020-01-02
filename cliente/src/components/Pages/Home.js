@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import AppNavbar from "../AppNavbar";
 import TaskAlert from "../TaskAlert";
 import TaskList from "../TaskList";
 import NewTaskModal from "../NewTaskModal";
@@ -10,7 +9,6 @@ const Home = () => {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   async function fetchData() {
     setLoading(true);
@@ -26,7 +24,6 @@ const Home = () => {
 
   return (
     <div>
-      <AppNavbar isLoggedIn={isLoggedIn} />
       <TaskAlert />
       <h2 className="m-3 text-center">Tareas</h2>
       <Container>

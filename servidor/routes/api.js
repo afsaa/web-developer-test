@@ -1,4 +1,5 @@
-const express = require("express");
+const express = require("express"),
+  md5 = require("md5");
 const router = express.Router();
 const { db } = require("../dbconfig/dbconfig");
 
@@ -44,4 +45,19 @@ router.delete("/tareas/:id", (req, res) => {
     });
 });
 
+// Auth
+router.post("/login", (req, res) => {
+  db.any(
+    `SELECT * FROM usuario WHERE nombre_usuario='${
+      req.body.email
+    }' AND "contraseña"='${md5(req.body.password)}'`
+  )
+    .then(data => {
+      res.json(data);
+    })
+    .catch(error => {
+      console.log("Error: ", error);
+      res.json({ success: false });
+    });
+});
 module.exports = router;

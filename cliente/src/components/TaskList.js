@@ -5,8 +5,8 @@ import axios from "axios";
 import "./Styles/TaskList.css";
 
 const TaskList = props => {
-  useEffect(() => {
-    props.fetchData();
+  useEffect((ueProps = props) => {
+    ueProps.fetchData();
   }, []);
 
   const handleDelete = id => {

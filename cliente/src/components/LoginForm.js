@@ -4,13 +4,17 @@ import { Container, Button, Form, FormGroup, Input } from "reactstrap";
 const LoginForm = props => {
   return (
     <Container>
-      <Form className="my-3 p-4 border">
+      <Form
+        className="my-3 p-3 border"
+        onSubmit={e => props.handleLoginFormSubmit(e)}
+      >
         <FormGroup>
           <Input
             type="email"
             name="email"
             id="formEmail"
-            placeholder="your-email@something.com"
+            placeholder="tu-correo@something.com"
+            onChange={e => props.handleChange(e)}
           />
         </FormGroup>
         <FormGroup>
@@ -19,6 +23,7 @@ const LoginForm = props => {
             name="password"
             id="formPass"
             placeholder="Password"
+            onChange={e => props.handleChange(e)}
           />
         </FormGroup>
         <Button color="success" block>
