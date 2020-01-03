@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import React, { useState } from "react";
 import {
   Collapse,
   Navbar,
@@ -12,38 +11,23 @@ import {
 
 const AppNavbar = props => {
   const [collapsed, setCollapsed] = useState(true);
-  const isLoggedIn = props.isLoggedIn;
   const toggleNavbar = () => setCollapsed(!collapsed);
-
-  useEffect(() => {
-    let history = useHistory();
-    history.push("/");
-  }, [isLoggedIn]);
+  const userId = localStorage.getItem("userId");
 
   return (
-    <div>
+    <React.Fragment>
       <Navbar color="primary" dark>
-        {isLoggedIn ? (
-          <NavbarBrand href="/" className="mr-auto">
-            Tareas
-          </NavbarBrand>
-        ) : (
-          <NavbarBrand href="/" className="mr-auto">
-            Login
-          </NavbarBrand>
-        )}
+        <NavbarBrand href="/" className="mr-auto">
+          Gestor de Tareas
+        </NavbarBrand>
         <NavbarToggler onClick={toggleNavbar} className="mr-2" />
         <Collapse isOpen={!collapsed} navbar>
           <Nav navbar>
-            {isLoggedIn ? (
+            {userId ? (
               <NavItem className="my-2">
-                <Link
-                  className="text-light"
-                  to="/"
-                  onClick={(isLoggedIn = false)}
-                >
+                <NavLink className="text-light" onClick={() => props.logOut()}>
                   LogOut
-                </Link>
+                </NavLink>
               </NavItem>
             ) : (
               <NavItem className="my-2">
@@ -55,7 +39,7 @@ const AppNavbar = props => {
           </Nav>
         </Collapse>
       </Navbar>
-    </div>
+    </React.Fragment>
   );
 };
 

@@ -1,19 +1,17 @@
 import React, { useState } from "react";
 import { Alert } from "reactstrap";
 
-const AlertExample = props => {
+const TaskAlert = props => {
   const [visible, setVisible] = useState(true);
 
   const onDismiss = () => setVisible(false);
 
   const today = new Date();
   const expDate = new Date(props.expTarea);
-  const hoursDiff = today.getHours() - expDate.getHours();
+  //const hoursDiff = today.getHours() - expDate.getHours();
   if (
     today.getFullYear() === expDate.getFullYear() &&
-    today.getDate() === expDate.getDate() &&
-    hoursDiff <= 1 &&
-    hoursDiff >= -1
+    today.getDate() === expDate.getDate()
   ) {
     return (
       <Alert color="warning" isOpen={visible} toggle={onDismiss}>
@@ -25,4 +23,4 @@ const AlertExample = props => {
   }
 };
 
-export default AlertExample;
+export default TaskAlert;
