@@ -17,3 +17,21 @@ Para realizar el proyecto usé **Express**, **PostgreSQL** y **ReactJS**.
 ## Funcionalidades extras planteadas sin implementar
 
 - Filtración de tareas por nombre.
+
+## Instalación dependencias Frontend
+
+Para instalar las dependencias ingresar a la carpeta **cliente** y ejercutar el comando:
+
+`$ npm install`
+
+## Instalación dependencias Backend
+
+Para instalar las dependencias ingresar a la carpeta **servidor** y ejercutar el comando:
+
+`$ npm install`
+
+## Ejecución
+
+Para ejecutar tanto el Frontend como el Backend usar el siguiente comando:
+
+`$ npm run dev`
